@@ -46,7 +46,7 @@ public class PhanSo {
         PhanSo daonguoc = new PhanSo(ts,ms);
         System.out.println("Phân số đảo ngược : " + daonguoc.mauso + "/" + daonguoc.tuso);
     }
-    public void congPhanSo(PhanSo ps) {
+    public void add(PhanSo ps) {
         int ts = this.getTuso() * ps.getMauso() + ps.getTuso() * this.getMauso();
         int ms = this.getMauso() * ps.getMauso();
         PhanSo phanSoTong = new PhanSo(ts, ms);
@@ -54,7 +54,7 @@ public class PhanSo {
         System.out.println("Tổng hai phân số = " + phanSoTong.tuso + "/" + phanSoTong.mauso);
     }
 
-    public void truPhanSo(PhanSo ps) {
+    public void sub(PhanSo ps) {
         int ts = this.getTuso() * ps.getMauso() - ps.getTuso() * this.getMauso();
         int ms = this.getMauso() * ps.getMauso();
         PhanSo phanSoHieu = new PhanSo(ts, ms);
@@ -62,7 +62,7 @@ public class PhanSo {
         System.out.println("Hiệu hai phân số = " + phanSoHieu.tuso + "/" + phanSoHieu.mauso);
     }
 
-    public void nhanPhanSo(PhanSo ps) {
+    public void mul(PhanSo ps) {
         int ts = this.getTuso() * ps.getTuso();
         int ms = this.getMauso() * ps.getMauso();
         PhanSo phanSoTich = new PhanSo(ts, ms);
@@ -70,7 +70,7 @@ public class PhanSo {
         System.out.println("Tích hai phân số = " + phanSoTich.tuso + "/" + phanSoTich.mauso);
     }
 
-    public void chiaPhanSo(PhanSo ps) {
+    public void div(PhanSo ps) {
         int ts = this.getTuso() * ps.getMauso();
         int ms = this.getMauso() * ps.getTuso();
         PhanSo phanSoThuong = new PhanSo(ts, ms);
