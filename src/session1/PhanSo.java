@@ -25,6 +25,12 @@ public class PhanSo {
         this.mauso = mauso;
     }
 
+    public  void inPhanSo(){
+        int ts = this.getTuso();
+        int ms = this.getMauso();
+        PhanSo inPS = new PhanSo(ts,ms);
+        System.out.println("In Phân Số : "+ inPS.tuso+"/"+inPS.mauso);
+    }
     public  int timUSCLN(int a,int b){
         while (a!=b){
             if (a<b){
