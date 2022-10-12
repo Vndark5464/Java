@@ -27,5 +27,12 @@ public class Main {
         t.setC(sc.nextInt());
         System.out.println("Chu vi : "+t.tinhChuvi());
         System.out.println("Dien tich : "+t.tinhDienTich());
+
+        PhanSo ps1 = new PhanSo(12,24);
+        PhanSo ps2 = new PhanSo(1,3);
+
+        ps1.congPhanSo(ps2);
+        ps1.daonguocPhanSo();
+
     }
 }
