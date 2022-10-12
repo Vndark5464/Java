@@ -31,7 +31,7 @@ public class Main {
         PhanSo ps1 = new PhanSo(12,24);
         PhanSo ps2 = new PhanSo(1,3);
 
-        ps1.congPhanSo(ps2);
+        ps1.add(ps2);
         ps1.daonguocPhanSo();
 
     }
