@@ -2,6 +2,8 @@ package session2;
 
 import session1.Student;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args){
         Student t = new Student();
@@ -15,5 +17,7 @@ public class Main {
         FptStudent ft1 = new FptStudent("Xin chao cac ban");
 
         FptStudent ft2 = new FptStudent("Th22092929","Vũ Thế Anh","092282882");
+
+
     }
 }
