@@ -1,0 +1,25 @@
+package session3;
+
+public class KhachHang2 extends KhachHang{
+       private char quoctich2;
+
+    public KhachHang2() {
+    }
+public KhachHang2(int id, char name, double giatien){
+    this.id = id;
+    this.name = name;
+    this.giatien = giatien;
+}
+    public char getQuoctich2() {
+        return quoctich2;
+    }
+
+    public void setQuoctich2(char quoctich2) {
+        this.quoctich2 = quoctich2;
+    }
+    @Override
+    public void DonGia(int SoLuong){
+        this.setGiatien(SoLuong*2000);
+    }
+}
+
