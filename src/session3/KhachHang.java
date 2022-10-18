@@ -36,10 +36,12 @@ public class KhachHang {
         this.name = name;
     }
 
-   public int getSoluong(int soluong) {this.soluong=soluong}
+   public int getSoluong(int soluong) {
+       return soluong;
+   }
 
     public void setSoluong(int soluong) {
-        this.soluong=soluong
+        this.soluong=soluong;
     }
 
     public  char getQuoctich(){
