@@ -5,10 +5,10 @@ public class KhachHang2 extends KhachHang{
 
     public KhachHang2() {
     }
-public KhachHang2(int id, char name, double giatien){
+public KhachHang2(int id, char name, int soluong){
     this.id = id;
     this.name = name;
-    this.giatien = giatien;
+    this.soluong = soluong;
 }
     public char getQuoctich2() {
         return quoctich2;
@@ -19,7 +19,7 @@ public KhachHang2(int id, char name, double giatien){
     }
     @Override
     public void DonGia(int SoLuong){
-        this.setGiatien(SoLuong*2000);
+        return getSoluong()*2000;
     }
 }
 

@@ -7,16 +7,16 @@ public class KhachHang {
     char quoctich;
 
 
-    double giatien;
+    int soluong;
 
 
     public KhachHang() {
     }
 
-    public KhachHang(int id, char name, double giatien, char quoctich) {
+    public KhachHang(int id, char name, int soluong, char quoctich) {
         this.id = id;
         this.name = name;
-        this.giatien = giatien;
+        this.soluong = soluong;
         this.quoctich = quoctich;
     }
 
@@ -36,12 +36,10 @@ public class KhachHang {
         this.name = name;
     }
 
-    public double getGiatien() {
-        return giatien;
-    }
+   public int getSoluong(int soluong) {this.soluong=soluong}
 
-    public void setGiatien(double giatien) {
-        this.giatien = giatien;
+    public void setSoluong(int soluong) {
+        this.soluong=soluong
     }
 
     public  char getQuoctich(){
@@ -51,17 +49,15 @@ public class KhachHang {
         this.quoctich = quoctich;
       }
 
-    public void DonGia(int SoLuong){
-        if (SoLuong>0 && SoLuong<50){
-            this.setGiatien(SoLuong*1000);
-        } else if (SoLuong>=50 && SoLuong<=100) {
-            this.setGiatien(SoLuong*1200);
-        } else if (SoLuong>100 && SoLuong<=200) {
-            this.setGiatien(SoLuong*1500);
-        }else if (SoLuong>200){
-            this.setGiatien(SoLuong*2000);
-        }else {
-            System.out.println("Vui lòng chọn số lượng hợp lệ");
+    public double GiaTien() {
+        if(getSoluong() < 50) {
+            return (double) getSoluong() * 1000;
+        } else if (getSoluong() >=50 && getSoluong() < 100) {
+            return (double) 50 * 1000 + (getSoluong() - 50) * 1200;
+        } else if (getSoluong() >= 100 && getSoluong() < 200) {
+            return (double) 50 * 1000 + 50 * 1200 + (getSoluong() - 100) * 1500;
+        } else {
+            return (double) 50 * 1000 + 50 * 1200 + 100 * 1500 + (getSoluong() - 200) * 2000;
         }
     }
 }
