@@ -36,7 +36,7 @@ public class KhachHang {
         this.name = name;
     }
 
-   public int getSoluong(int soluong) {
+   public int getSoluong() {
        return soluong;
    }
 
