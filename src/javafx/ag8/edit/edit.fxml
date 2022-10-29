@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ag8.edit.EditBookController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.ag8.edit.EditController">
     <children>
-        <Text layoutX="323.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Book infomation:">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Text>
-        <TextField fx:id="txtId" layoutX="230.0" layoutY="86.0" prefHeight="25.0" prefWidth="381.0" promptText="ID" />
-        <TextField fx:id="txtName" layoutX="230.0" layoutY="131.0" prefHeight="25.0" prefWidth="381.0" promptText="Name" />
-        <TextField fx:id="txtAuthor" layoutX="229.0" layoutY="177.0" prefHeight="25.0" prefWidth="381.0" promptText="Author" />
-        <ComboBox fx:id="cbPublisher" layoutX="229.0" layoutY="229.0" prefHeight="25.0" prefWidth="381.0" promptText="Publisher" />
-        <ComboBox fx:id="cbType" layoutX="230.0" layoutY="279.0" prefHeight="25.0" prefWidth="381.0" promptText="Type" />
-        <TextField fx:id="txtPrice" layoutX="230.0" layoutY="330.0" prefHeight="25.0" prefWidth="381.0" promptText="Price" />
-        <TextField fx:id="txtQuantity" layoutX="230.0" layoutY="378.0" prefHeight="25.0" prefWidth="381.0" promptText="Quantity" />
-        <Button layoutX="340.0" layoutY="433.0" mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="101.0" style="-fx-background-color: #2D99B1;" text="Edit" textFill="WHITE" />
-        <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBackToList" style="-fx-background-color: #979797;" text="&lt; Back" textFill="WHITE" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publisher:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
-        <Text fill="#0000007e" layoutX="170.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+        <Button layoutX="768.0" layoutY="14.0" mnemonicParsing="false" onAction="#goList" text="List" />
+        <Text layoutX="137.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+        <Text layoutX="135.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author" />
+        <Text layoutX="132.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nxb" />
+        <TextField fx:id="txtName" layoutX="136.0" layoutY="68.0" promptText="Name" />
+        <TextField fx:id="txtAuthor" layoutX="136.0" layoutY="127.0" promptText="Author" />
+        <TextField fx:id="txtPrice" layoutX="136.0" layoutY="305.0" promptText="Price" />
+        <ChoiceBox fx:id="choiceNxb" layoutX="135.0" layoutY="189.0" prefWidth="150.0" />
+        <Text layoutX="130.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+        <ChoiceBox fx:id="choiceType" layoutX="135.0" layoutY="247.0" prefWidth="150.0" />
+        <Text layoutX="130.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+        <Text layoutX="130.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty" />
+        <TextField fx:id="txtQty" layoutX="136.0" layoutY="362.0" promptText="Qty" />
+        <Button layoutX="143.0" layoutY="420.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+        <Button layoutX="276.0" layoutY="420.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
     </children>
 </Pane>

@@ -1,25 +1,70 @@
 package javafx.ag8;
 
+import javafx.ag8.edit.EditController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Objects;
+
 public class Book {
     private String id;
     private String name;
     private String author;
-    private String publisher;
+    private String nxb;
     private String type;
-    private double price;
-    private int quantity;
+    private BigDecimal price;
+    private int qty;
+    private Button edit;
+
+    public Button getEdit() {
+        return edit;
+    }
+
+    public void setEdit(Button edit) {
+        this.edit = edit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public Book() {
     }
 
-    public Book(String id, String name, String author, String publisher, String type, double price, int quantity) {
+    public Book(String id, String name, String author, String nxb, String type, BigDecimal price, int qty) {
         this.id = id;
         this.name = name;
         this.author = author;
-        this.publisher = publisher;
+        this.nxb = nxb;
         this.type = type;
         this.price = price;
-        this.quantity = quantity;
+        this.qty = qty;
+        this.edit = new Button("Edit");
+        edit.setOnAction(event -> {
+            EditController.editing = this;
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("edit/edit.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+            Main.mainStage.setTitle("Edit");
+            Main.mainStage.setScene(new Scene(root, 820,600));
+        });
     }
 
     public String getId() {
@@ -46,12 +91,12 @@ public class Book {
         this.author = author;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getNxb() {
+        return nxb;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setNxb(String nxb) {
+        this.nxb = nxb;
     }
 
     public String getType() {
@@ -62,24 +107,30 @@ public class Book {
         this.type = type;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     @Override
     public String toString() {
-        return getId() + " - " + getName() + " - " + getAuthor() + " - " + getPublisher() + " - " + getType() + " - " + getPrice() + " - " + getQuantity();
+        return
+                "name:'" + name + '\'' +
+                        ", author:'" + author + '\'' +
+                        ", nxb:'" + nxb + '\'' +
+                        ", type:'" + type + '\'' +
+                        ", price:" + price +
+                        ", qty:" + qty ;
     }
 }

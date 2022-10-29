@@ -2,7 +2,7 @@ package javafx.ag8.list;
 
 import javafx.ag8.Book;
 import javafx.ag8.Main;
-import javafx.ag8.edit.EditBookController;
+import javafx.ag8.edit.EditController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,105 +10,102 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 public class ListController implements Initializable {
-    public ListView<Book> lvBook;
+    public static final ObservableList<Book> books = FXCollections.observableArrayList();
+    public TableView<Book> lv;
+    public TableColumn<Book,String > cName;
+    public TableColumn<Book,String> cAuthor;
+    public TableColumn<Book,String > cNxb;
+    public TableColumn<Book,String > cType;
+    public TableColumn<Book,BigDecimal > cPrice;
+    public TableColumn<Book,Integer > cQty;
+    public TableColumn<Book,String > cAction;
+    private boolean sortName = false;
+    private boolean sortPrice = false;
+    private boolean sortQty = false;
 
-    public static ObservableList<Book> bookList = FXCollections.observableArrayList();
-    public TextField txtSearch;
-    private boolean sortOrder = true;
+    public void sortByName(ActionEvent actionEvent) {
+        sortName = !sortName;
+        sortPrice =false;
+        sortQty =false;
+        books.sort((o1, o2) -> {
+            return sortName ? o1.getName().compareTo(o2.getName()) : o2.getName().compareTo(o1.getName());
+        });
+        lv.refresh();
+    }
+
+    public void sortByQty(ActionEvent actionEvent) {
+        sortQty =!sortQty;
+        sortName=false;
+        sortPrice=false;
+        books.sort((o1, o2) -> {
+            return sortName ?Integer.compare(o1.getQty(),o2.getQty()):Integer.compare(o2.getQty(), o1.getQty());
+        });
+        lv.refresh();
+
+    }public void sortByPrice(ActionEvent actionEvent) {
+        sortPrice =!sortPrice;
+        sortName=false;
+        sortQty=false;
+        books.sort((o1, o2) -> {
+            return sortPrice ?o1.getPrice().compareTo(o2.getPrice()):o2.getPrice().compareTo(o1.getPrice());
+        });
+        lv.refresh();
+
+    }
+    public void goEdit(){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../edit/edit.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+        Main.mainStage.setTitle("Edit");
+        Main.mainStage.setScene(new Scene(root, 820,600));
+    }
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lvBook.setItems(bookList);
-    }
-
-    public void goToAdd(ActionEvent actionEvent) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../add/add.fxml"));
-        Main.rootStage.setTitle("Add book");
-        Main.rootStage.setScene(new Scene(root, 800, 600));
-    }
-
-    public void goToEdit(ActionEvent actionEvent){
-        try {
-            if (lvBook.getSelectionModel().getSelectedItem() == null)
-                throw new Exception("No book selected!");
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Confirmation");
-            confirmAlert.setHeaderText("Are you sure you want to edit this book info?");
-            if (confirmAlert.showAndWait().get() == ButtonType.OK) {
-                EditBookController.editedBook = lvBook.getSelectionModel().getSelectedItem();
-
-                Parent root = FXMLLoader.load(getClass().getResource("../edit/edit.fxml"));
-                Main.rootStage.setTitle("Edit book");
-                Main.rootStage.setScene(new Scene(root, 800, 600));
-            }
-
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(e.getMessage());
-            alert.show();
+        if(books.isEmpty()){
+            books.add(new Book(UUID.randomUUID().toString(),"Book 1","Author 1","nxb kim dong","thiếu nhi",new BigDecimal(40000),14));
+            books.add(new Book(UUID.randomUUID().toString(),"Book 2","Author 2","nxb kim dong","thiếu nhi",new BigDecimal(15000),23));
+            books.add(new Book(UUID.randomUUID().toString(),"Book 3","Author 3","nxb kim dong","thiếu nhi",new BigDecimal(43000),4));
+            books.add(new Book(UUID.randomUUID().toString(),"Book 4","Author 4","nxb kim dong","thiếu nhi",new BigDecimal(70000),12));
         }
+        cName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        cNxb.setCellValueFactory(new PropertyValueFactory<>("nxb"));
+        cType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        cPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        cQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        cAction.setCellValueFactory(new PropertyValueFactory<>("edit"));
+        lv.setItems(books);
+//      lv.setOnMouseClicked(event -> {
+//          EditController.editing=lv.getSelectionModel().getSelectedItems().get(0);
+//          goEdit();
+//      });
     }
 
-    public void delete(ActionEvent actionEvent) {
-        try {
-            if (lvBook.getSelectionModel().getSelectedItem() == null)
-                throw new Exception("No book selected!");
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Confirmation");
-            confirmAlert.setHeaderText("Are you sure you want to delete this book?");
-            if (confirmAlert.showAndWait().get() == ButtonType.OK)
-                bookList.remove(lvBook.getSelectionModel().getSelectedItem());
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning!");
-            alert.setHeaderText(e.getMessage());
-            alert.show();
-        }
+    public void goAdd(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../add/add.fxml")));
+        Main.mainStage.setTitle("Add ");
+        Main.mainStage.setScene(new Scene(root, 820,600));
     }
 
-    public void sortByPrice(ActionEvent actionEvent) {
-        bookList.sort(new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return sortOrder ? Double.compare(o1.getPrice(), o2.getPrice()) : Double.compare(o2.getPrice(), o1.getPrice());
-            }
-        });
-        sortOrder = !sortOrder;
-    }
 
-    public void sortByQuantity(ActionEvent actionEvent) {
-        bookList.sort(new Comparator<Book>() {
-            @Override
-            public int compare(Book o1, Book o2) {
-                return sortOrder ? Integer.compare(o1.getQuantity(), o2.getQuantity()) : Integer.compare(o2.getQuantity(), o1.getQuantity());
-            }
-        });
-        sortOrder = !sortOrder;
-    }
-
-    public void search(ActionEvent actionEvent) {
-        String searchValue = txtSearch.getText();
-        ObservableList<Book> searchResult = FXCollections.observableArrayList();
-        searchResult = bookList.filtered(book -> book.getName().toLowerCase().contains(searchValue.toLowerCase()));
-        lvBook.setItems(searchResult);
-    }
-
-    public void clearSearch(ActionEvent actionEvent) {
-        txtSearch.clear();
-        lvBook.setItems(bookList);
-    }
 }
