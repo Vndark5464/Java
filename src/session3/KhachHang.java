@@ -1,65 +1,30 @@
 package session3;
 
-public class KhachHang {
-    int id;
-    char name;
+public class KhachHang extends KhachHang1{
+    private String doiTuong;
 
-    char quoctich;
-
-
-    int soluong;
-
-
-    public KhachHang() {
+    public KhachHang(String code, String fullName, String invoiceDate, Integer qty, String doiTuong) {
+        super(code, fullName, invoiceDate, qty);
+        this.doiTuong = doiTuong;
     }
 
-    public KhachHang(int id, char name, int soluong, char quoctich) {
-        this.id = id;
-        this.name = name;
-        this.soluong = soluong;
-        this.quoctich = quoctich;
+    public String getDoiTuong() {
+        return doiTuong;
     }
 
-    public int getId() {
-        return id;
+    public void setDoiTuong(String doiTuong) {
+        this.doiTuong = doiTuong;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public char getName() {
-        return name;
-    }
-
-    public void setName(char name) {
-        this.name = name;
-    }
-
-   public int getSoluong() {
-       return soluong;
-   }
-
-    public void setSoluong(int soluong) {
-        this.soluong=soluong;
-    }
-
-    public  char getQuoctich(){
-        return quoctich;
-    }
-      public void setQuoctich(char quoctich){
-        this.quoctich = quoctich;
-      }
-
-    public double GiaTien() {
-        if(getSoluong() < 50) {
-            return (double) getSoluong() * 1000;
-        } else if (getSoluong() >=50 && getSoluong() < 100) {
-            return (double) 50 * 1000 + (getSoluong() - 50) * 1200;
-        } else if (getSoluong() >= 100 && getSoluong() < 200) {
-            return (double) 50 * 1000 + 50 * 1200 + (getSoluong() - 100) * 1500;
-        } else {
-            return (double) 50 * 1000 + 50 * 1200 + 100 * 1500 + (getSoluong() - 200) * 2000;
-        }
+    @Override
+    public double calculateMoney() {
+        if(getQty()<50)
+            return getQty() * 1000;
+        else if(getQty() < 100)
+            return 50*1000+ (getQty()-50)*1200;
+        else if(getQty() < 200)
+            return 50*1000 + 50 * 1200 + (getQty()-100)*1500;
+        else
+            return 50*1000 + 50 * 1200 + 100 * 1500 + (getQty()-200)*2000;
     }
 }

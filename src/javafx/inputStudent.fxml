@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<Pane fx:controller="JavaFx.InputStudent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="javafx.InputStudent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="248.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thông tin sinh viên" wrappingWidth="103.13671875" />
       <TextField fx:id="txtName" layoutX="51.0" layoutY="56.0" text="Tên sinh viên" />

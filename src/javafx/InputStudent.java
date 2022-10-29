@@ -1,4 +1,4 @@
-package JavaFx;
+package javafx;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
